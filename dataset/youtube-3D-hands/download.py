@@ -41,20 +41,21 @@ def download_video(yt_id, out_dir_root):
     
     vid_path = join(out_path, 'raw.mp4')
 
-    # if not os.path.exists(vid_path):
-    #     print('Download a video.')
-    #     YouTube(join(YT_ROOT, yt_id)).streams \
-    #         .filter(subtype='mp4', only_video=True) \
-    #         .order_by('resolution') \
-    #         .desc() \
-    #         .first() \
-    #         .download(out_path)
+    if not os.path.exists(vid_path):
+        print('Download a video.')
+        YouTube(join(YT_ROOT, yt_id)).streams \
+            .filter(subtype='mp4', only_video=True) \
+            .order_by('resolution') \
+            .desc() \
+            .first() \
+            .download(out_path)
 
-    #     os.rename(join(out_path, os.listdir(out_path)[0]),
-    #               vid_path)
+        os.rename(join(out_path, os.listdir(out_path)[0]),
+                  vid_path)
         
     return out_path
 
 if __name__ == "__main__":
+    # Take in storage path via sys argv
     get_video_paths(training_list, '../storage/data/')
     get_video_paths(test_val_list, '../storage/data/')
